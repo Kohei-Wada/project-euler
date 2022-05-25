@@ -1,0 +1,163 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           project-euler
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/project-euler#readme>
+homepage:       https://github.com/Kohei-Wada/project-euler#readme
+bug-reports:    https://github.com/Kohei-Wada/project-euler/issues
+author:         Kohei Wada
+maintainer:     program3152019@gmail.com
+copyright:      Kohei Wada
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
+
+source-repository head
+  type: git
+  location: https://github.com/Kohei-Wada/project-euler
+
+library
+  exposed-modules:
+      Lib
+  other-modules:
+      Paths_project_euler
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , mtl
+  default-language: Haskell2010
+
+executable project-euler-exe
+  main-is: Main.hs
+  other-modules:
+      Problems.Problem1
+      Problems.Problem10
+      Problems.Problem100
+      Problems.Problem11
+      Problems.Problem12
+      Problems.Problem13
+      Problems.Problem14
+      Problems.Problem15
+      Problems.Problem16
+      Problems.Problem17
+      Problems.Problem18
+      Problems.Problem19
+      Problems.Problem2
+      Problems.Problem20
+      Problems.Problem21
+      Problems.Problem22
+      Problems.Problem23
+      Problems.Problem24
+      Problems.Problem25
+      Problems.Problem26
+      Problems.Problem27
+      Problems.Problem28
+      Problems.Problem29
+      Problems.Problem3
+      Problems.Problem30
+      Problems.Problem31
+      Problems.Problem32
+      Problems.Problem33
+      Problems.Problem34
+      Problems.Problem35
+      Problems.Problem36
+      Problems.Problem37
+      Problems.Problem38
+      Problems.Problem39
+      Problems.Problem4
+      Problems.Problem40
+      Problems.Problem41
+      Problems.Problem42
+      Problems.Problem43
+      Problems.Problem44
+      Problems.Problem45
+      Problems.Problem46
+      Problems.Problem47
+      Problems.Problem48
+      Problems.Problem49
+      Problems.Problem5
+      Problems.Problem50
+      Problems.Problem51
+      Problems.Problem52
+      Problems.Problem53
+      Problems.Problem54
+      Problems.Problem55
+      Problems.Problem56
+      Problems.Problem57
+      Problems.Problem58
+      Problems.Problem59
+      Problems.Problem6
+      Problems.Problem60
+      Problems.Problem61
+      Problems.Problem62
+      Problems.Problem63
+      Problems.Problem64
+      Problems.Problem65
+      Problems.Problem66
+      Problems.Problem67
+      Problems.Problem68
+      Problems.Problem69
+      Problems.Problem7
+      Problems.Problem70
+      Problems.Problem71
+      Problems.Problem72
+      Problems.Problem73
+      Problems.Problem74
+      Problems.Problem75
+      Problems.Problem76
+      Problems.Problem77
+      Problems.Problem78
+      Problems.Problem79
+      Problems.Problem8
+      Problems.Problem80
+      Problems.Problem81
+      Problems.Problem82
+      Problems.Problem83
+      Problems.Problem84
+      Problems.Problem85
+      Problems.Problem86
+      Problems.Problem87
+      Problems.Problem88
+      Problems.Problem89
+      Problems.Problem9
+      Problems.Problem90
+      Problems.Problem91
+      Problems.Problem92
+      Problems.Problem93
+      Problems.Problem94
+      Problems.Problem95
+      Problems.Problem96
+      Problems.Problem97
+      Problems.Problem98
+      Problems.Problem99
+      Paths_project_euler
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , mtl
+    , project-euler
+  default-language: Haskell2010
+
+test-suite project-euler-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      Paths_project_euler
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      base >=4.7 && <5
+    , mtl
+    , project-euler
+  default-language: Haskell2010
