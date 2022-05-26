@@ -1,19 +1,8 @@
 module Problems.Problem7 where
 
-import Control.Monad.State
+import Factor (isPrime, factorization) 
 
 
 
-
-
-
-isPrime :: Integer -> Bool
-isPrime n = factor n == [1, n]
-    where factor n = [x | x <- [1..n], n `mod` x == 0]
-
-
-
-
-
-
-problem7 = print $ isPrime 23
+problem7 = do 
+    print $ take 10000 $ filter isPrime [1, 3..1000000]

@@ -10,6 +10,3 @@ factorization n = v : factorization (n `div` v)
     where v = factor n !! 1
 
 
-
-
-
