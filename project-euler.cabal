@@ -39,7 +39,6 @@ executable project-euler-exe
   main-is: Main.hs
   other-modules:
       Problems.Problem1
-      Problems.Problem10
       Problems.Problem100
       Problems.Problem11
       Problems.Problem12

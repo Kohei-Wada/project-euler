@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <math.h>
 
 #define ARRAYSIZE 2000000
 
 typedef struct list {
 	int a[ARRAYSIZE], start, end; 
 } List; 
-
 
 inline int listLength(List *l) { return l->end - l->start;}
 
@@ -45,7 +45,6 @@ List* listFilter(List *l, int a)
 	return l; 
 }
 
-
 int listSum(List *l)
 {
 	int sum = 0, value; 
@@ -53,7 +52,6 @@ int listSum(List *l)
 		sum += value; 
 
 	return sum; 
-
 }
 
 List *makeNumberList(List *l, int start, int end) 
@@ -62,17 +60,21 @@ List *makeNumberList(List *l, int start, int end)
 	return l;
 }
 
+void printlist(List *l){ for(int i = l->start; i < l->end; ++i)  printf("%d, ", l->a[i]); }
+
+
 List *erast(List *l, List *res) 
 {
 	int newPrime; 
-	while ((newPrime = listPop(l)) != 0)
+	while ((newPrime = listPop(l)) < sqrt(ARRAYSIZE)) 
 		listAdd(res, newPrime), listFilter(l, newPrime);
-	
+
+	while ((newPrime = listPop(l)) != 0) 
+		listAdd(res, newPrime);
+
 	return res; 
 }
 
-
-void printlist(List *l){ for(int i = l->start; i < l->end; ++i)  printf("%d, ", l->a[i]); }
 
 int main(void)
 {
@@ -83,7 +85,7 @@ int main(void)
 
 	makeNumberList(nums, 2, ARRAYSIZE); 
 	erast(nums, res); 
-//	printlist(res); 
+	printlist(res); 
 
 	printf("sum of primes ( < %d) :  %d\n", ARRAYSIZE, listSum(res)); 
 
