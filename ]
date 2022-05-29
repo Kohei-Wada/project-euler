@@ -1,0 +1,48 @@
+{-# LANGUAGE RecordWildCards #-}
+
+module Problems.Problem14 where
+
+import Data.Map as M
+import Control.Monad
+import Control.Monad.State
+
+
+data Collatz = Collatz { _seq :: [Int]} deriving Show
+
+
+
+
+fruits::[(String,Int)]
+fruits = [("apple",1),("orange",2),("banana",3),("peach",4),("cherry",5),("orange",6),("apple",7),("peach",8)]
+fruitsMap = M.fromList fruits
+
+
+
+
+doCollatz :: Int -> State (Map Int Collatz) () 
+doCollatz n = do 
+    m <- get 
+
+
+
+    return () 
+
+
+
+
+
+collatz :: Int -> Collatz 
+collatz 1 = Collatz [] 
+collatz n = 
+    let a = if even n then n `div` 2 else 3 * n + 1 
+        c@Collatz{..} = collatz a 
+     in c { _seq = [a] ++ _seq }
+
+
+
+
+problem14 :: IO ()
+problem14 = do 
+    print $ collatz 20
+
+

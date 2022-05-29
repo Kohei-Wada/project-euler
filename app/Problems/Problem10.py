@@ -13,7 +13,7 @@ def erat(num):
     return p + l
 
 def main(): 
-    print(erat(10000000))
+    print(erat(2000000))
 
 
 main()

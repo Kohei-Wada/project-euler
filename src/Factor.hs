@@ -4,6 +4,11 @@ module Factor where
 factor n = [x | x <- [1..n], n `mod` x == 0]
 
 
+factor' n = 
+    let l = [x | x <- [1 .. (floor.  sqrt . fromIntegral) n ], n `mod` x == 0 ] 
+     in l ++ map (div n) (reverse l)
+
+
 factorization 1 = []
 factorization n = v : factorization (n `div` v) 
     where v = factor n !! 1
