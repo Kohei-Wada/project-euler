@@ -1,11 +1,7 @@
 module Main where
     
-import Problems.Problem14
-import Factor
-
-import Data.List
-
+import Problems.Problem15
 
 main :: IO ()
 main = do 
-    problem14
+    problem15
