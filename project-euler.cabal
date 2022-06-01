@@ -35,6 +35,7 @@ library
     , containers
     , extra
     , mtl
+    , text
   default-language: Haskell2010
 
 executable project-euler-exe
@@ -150,6 +151,7 @@ executable project-euler-exe
     , extra
     , mtl
     , project-euler
+    , text
   default-language: Haskell2010
 
 test-suite project-euler-test
@@ -166,4 +168,5 @@ test-suite project-euler-test
     , extra
     , mtl
     , project-euler
+    , text
   default-language: Haskell2010
