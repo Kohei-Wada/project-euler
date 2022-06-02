@@ -1,6 +1,6 @@
 module Problems.Problem20 where
 
-import Factor
+import Factors
 
 
 problem20 :: IO () 

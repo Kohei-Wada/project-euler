@@ -1,6 +1,6 @@
 module Problems.Problem12 where
 
-import Factor
+import Factors
 
 
 

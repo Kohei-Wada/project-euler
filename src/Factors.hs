@@ -1,18 +1,26 @@
-module Factor where
+module Factors where
+
+import Control.Monad
 
 
-factor n = [x | x <- [1..n], n `mod` x == 0]
+
+factors :: Integer -> [Integer]
+factors n = join $ do 
+    let tmp  = filter (\x -> n `mod` x == 0) [1 .. (floor . sqrt . fromIntegral) n] 
+        tmp' = if last tmp ^ 2 == n then drop 1 (reverse tmp) else reverse tmp 
+    return $ tmp ++ map (n `div`) tmp'
 
 
+factorization :: Integer -> [Integer]
 factorization 1 = []
 factorization n = v : factorization (n `div` v) 
-    where v = factor n !! 1
-
+    where v = factors n !! 1
 
 
 factorial :: Integer -> Integer 
 factorial 0 = 1
 factorial n = n * factorial (n - 1) 
+
 
 --Todo 
 isPrime :: Integer -> Bool
@@ -25,9 +33,7 @@ isPrime n
   | otherwise = factorization n == [n] 
 
 
+
 sumPlaces :: Integer -> Integer
 sumPlaces 0 = 0
 sumPlaces n = n `mod` 10 + sumPlaces (n `div` 10)
-
-
-

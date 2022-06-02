@@ -1,6 +1,6 @@
 module Problems.Problem7 where
 
-import Factor (isPrime, factorization) 
+import Factors (isPrime, factorization) 
 
 
 
