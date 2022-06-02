@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Factors
+      Fibonacci
   other-modules:
       Paths_project_euler
   hs-source-dirs:
