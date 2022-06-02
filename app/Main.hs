@@ -1,10 +1,9 @@
 module Main where
     
 import Problems.Problem23
+import Factors 
+
 
 main :: IO ()
 main = do 
-    problem23
-
-
-
+    print $ filter isPrime [1..100]
