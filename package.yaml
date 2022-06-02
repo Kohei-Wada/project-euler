@@ -27,6 +27,7 @@ dependencies:
 - containers
 - extra
 - text
+- Unique
 
 library:
   source-dirs: src 

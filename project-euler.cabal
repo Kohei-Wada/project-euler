@@ -31,7 +31,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      base >=4.7 && <5
+      Unique
+    , base >=4.7 && <5
     , containers
     , extra
     , mtl
@@ -146,7 +147,8 @@ executable project-euler-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      Unique
+    , base >=4.7 && <5
     , containers
     , extra
     , mtl
@@ -163,7 +165,8 @@ test-suite project-euler-test
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      base >=4.7 && <5
+      Unique
+    , base >=4.7 && <5
     , containers
     , extra
     , mtl
