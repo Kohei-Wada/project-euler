@@ -28,6 +28,8 @@ dependencies:
 - extra
 - text
 - Unique
+- split
+- array
 
 library:
   source-dirs: src 

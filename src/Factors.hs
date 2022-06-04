@@ -4,6 +4,7 @@ import Control.Monad
 
 
 factors :: Integer -> [Integer]
+factors 0 = []
 factors n = join $ do 
     let tmp  = filter (\x -> n `mod` x == 0) [1 .. (floor . sqrt . fromIntegral) n] 
     return $ tmp ++ map (n `div`) (reverse $ if last tmp ^ 2 == n then init tmp else tmp)
