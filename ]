@@ -1,48 +1,20 @@
-{-# LANGUAGE RecordWildCards #-}
-
-module Problems.Problem14 where
-
-import Data.Map as M
-import Control.Monad
-import Control.Monad.State
+module Problems.Problem21 where
 
 
-data Collatz = Collatz { _seq :: [Int]} deriving Show
+import Factors
+
+isAmicable :: Integer -> Integer -> Bool
+isAmicable n m = tmp n == tmp m 
+    where tmp = sum . init . factors 
 
 
 
 
-fruits::[(String,Int)]
-fruits = [("apple",1),("orange",2),("banana",3),("peach",4),("cherry",5),("orange",6),("apple",7),("peach",8)]
-fruitsMap = M.fromList fruits
+problem21 :: IO () 
+problem21 = do 
+    print $ isAmicable 220 284
+    print $ (sum . factors)220
+    print $ (sum . init .factors)284
 
-
-
-
-doCollatz :: Int -> State (Map Int Collatz) () 
-doCollatz n = do 
-    m <- get 
-
-
-
-    return () 
-
-
-
-
-
-collatz :: Int -> Collatz 
-collatz 1 = Collatz [] 
-collatz n = 
-    let a = if even n then n `div` 2 else 3 * n + 1 
-        c@Collatz{..} = collatz a 
-     in c { _seq = [a] ++ _seq }
-
-
-
-
-problem14 :: IO ()
-problem14 = do 
-    print $ collatz 20
 
 
