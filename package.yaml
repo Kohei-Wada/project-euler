@@ -30,6 +30,7 @@ dependencies:
 - Unique
 - split
 - array
+- hmatrix
 
 library:
   source-dirs: src 
