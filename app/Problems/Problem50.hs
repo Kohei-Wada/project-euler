@@ -3,35 +3,30 @@ module Problems.Problem50 where
 import Eratosthenes
 import Factors
 import Control.Monad
+import Data.Maybe
 
 
-primes :: Integer -> [Integer]
-primes n = map (fromIntegral) $ erat [2.. fromIntegral n]
-
-
-convertList :: Int -> [Integer] -> [[Integer]]
-convertList n as = if length as < n || 2 * head as * (fromIntegral n) > last as 
+convert :: Integer -> [Integer] -> [[Integer]]
+convert n as = let n' = fromIntegral n in 
+                   if length as < n' || 2 * head as * n > last as 
                       then [] 
-                      else [take n as] ++ convertList n (tail as) 
+                      else [take n' as] ++ convert n (tail as) 
 
 
-safeLast :: [Integer] -> Integer 
-safeLast [] = 0 
-safeLast ns = last ns 
+maxLength :: Integer -> Integer
+maxLength n =  ((floor . sqrt) (1 + 8 * fromIntegral n) - 1) `div` 2
 
 
 problem50 :: IO () 
 problem50 = do 
-    let n  = 1000000
-        ps = primes n 
+    let n  = 1000000 :: Integer
+        m  = (fromIntegral . maxLength) n
+        ps = map fromIntegral $ erat [2 .. fromIntegral n]
+        as = join $ 
+            forM (reverse [21 .. m]) $ \l -> do 
+                let pss = convert l ps
+                    as  = filter (\t -> t < n && isPrime t) $ map sum pss
+                return $ if null as then Nothing else Just (l, last as) 
 
-    let anss = join $ forM (reverse [21..1414]) $ \x -> do 
-                let l   = convertList (fromIntegral x) ps
-                    ans = safeLast $ filter (\tmp -> tmp < n && isPrime tmp) $ map (sum) l 
-                return (x, ans) 
-         
-        answer = head $ filter (\x -> snd x /= 0) anss
-
+    print $ head $ catMaybes as
     
-    print answer
-
