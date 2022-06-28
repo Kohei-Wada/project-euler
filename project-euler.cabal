@@ -28,6 +28,7 @@ library
       Eratosthenes
       Factors
       Fibonacci
+      Quotient
   other-modules:
       Paths_project_euler
   hs-source-dirs:

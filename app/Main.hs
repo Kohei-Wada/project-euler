@@ -1,9 +1,10 @@
 module Main where
     
-import Problems.Problem26
+import Quotient
+import Control.Monad
+
 
 main :: IO ()
 main = do 
-    problem26
-
-
+    let ls = [ quotient (1, x) | x <- [1..10000]]
+    print $ q2d $ quotient (1, 998)
