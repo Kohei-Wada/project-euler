@@ -22,7 +22,7 @@ factorial n = n * factorial (n - 1)
 
 
 isPrime :: Integer -> Bool
-isPrime n = factors n == [1, n]
+isPrime n = if n <= 0 then False else factors n == [1, n]
 
 
 sumPlaces :: Integer -> Integer
