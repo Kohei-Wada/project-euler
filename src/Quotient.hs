@@ -3,20 +3,27 @@ module Quotient where
 
 import Control.Monad
 
-data Quotient = Quotient 
-    { _q       :: (Integer, Integer) } 
+newtype Quotient = Quotient (Integer, Integer)  
+
+data Decimal = Decimal { _quo :: Quotient }
 
 
-data Decimal = Decimal 
-    { _quo :: Quotient }
+instance Num Quotient where 
+    Quotient (a, b) + Quotient (c, d) = Quotient (a*d + b*c, b*d) 
+    Quotient (a, b) - Quotient (c, d) = Quotient (a*d - b*c, b*d) 
+    Quotient (a, b) * Quotient (c, d) = Quotient (a*c, b*d) 
+    abs (Quotient (a, b))             = Quotient (abs a, abs b) 
+    negate (Quotient (a, b))          = Quotient (negate a, b)
+    fromInteger a                     = Quotient (a, 1)
+    signum a                          = 1
 
 
 instance Show Quotient where
-    show Quotient{..} = let (a, b) = _q in show a ++ "/" ++ show b
+    show (Quotient (a, b)) = "Quotient " ++ show a ++ "/" ++ show b
 
 
 instance Show Decimal where 
-    show Decimal{..} = 
+    show Decimal{..} = "Decimal " ++
         if isRepeating _quo 
            then let fp  = fractionalPart _quo 
                     rp  = repeatingPart _quo 
@@ -29,7 +36,7 @@ instance Show Decimal where
 
 
 q2d :: Quotient -> Decimal 
-q2d x@Quotient{..} = Decimal x
+q2d = Decimal
 
 
 quotient :: (Integer, Integer) -> Quotient
@@ -41,36 +48,34 @@ isRepeating = not . null . repeatingPart
 
 
 repeatingPart :: Quotient -> [Integer]
-repeatingPart x@Quotient{..} = 
+repeatingPart x = 
     let fp = fractionalPart x 
      in if last fp == 0 && last (init fp) == 0 
            then [] else dropWhile (/= last fp) (init fp) 
                      
 
 integerPart :: Quotient -> Integer
-integerPart x@Quotient{..} = let (a, b) = _q in a `div` b
+integerPart (Quotient (a, b)) = a `div` b
 
 
 fractionalPart :: Quotient -> [Integer]
-fractionalPart x@Quotient{..} = 
-    let (a, b) = _q   
-     in map (\x -> 10*x `div` b) $ reclist b [a `mod` b]
+fractionalPart (Quotient (a, b)) = 
+     map (\x -> 10*x `div` b) $ reclist b [a `mod` b]
         where 
             reclist b cs = 
                 let l   = last cs
                     rem = l*10 `mod` b
                  in 
                     if l == 0 || elem rem cs
-                       then cs ++ [rem]
-                       else reclist b (cs ++ [rem])
+                       then cs ++ [rem] else reclist b (cs ++ [rem])
 
 --TODO
-reducing :: Quotient -> Quotient 
-reducing = id
+reduce:: Quotient -> Quotient 
+reduce = id
 
 
-qtientTest :: IO () 
-qtientTest = do 
+quotientTest :: IO () 
+quotientTest = do 
     let target = [ Quotient (1, x) | x <- [1, 3, 11, 27, 101, 41, 7, 239, 73, 81, 451, 21649, 707, 53]]
     print $ map (length . repeatingPart) target == [0..13] 
 
