@@ -4,8 +4,7 @@ import Data.List
 import Data.List.Split
 
 import Control.Monad
-import Data.Function
-
+import Control.Monad.State
 
 type SplitWay = [[Int]]
 
@@ -16,22 +15,12 @@ list2num (n:ns) = 10 ^ length ns * n + list2num ns
 
 
 splitWays :: [a] -> SplitWay
-splitWays as = let l  = length as 
-                   ns = [1..length as] 
-                in [[x, y, z] | x <- ns, y <- ns, z <- ns, x + y + z == l]
+splitWays as = let ns = [1..length as] in [[x, y, 4] | x <- ns, y <- ns, x + y == 5]
 
 
 isPDPair :: [[Int]] -> Bool
 isPDPair nss = 
     let ns = map list2num nss in (ns!!0) * (ns!!1) == (ns!!2) 
-
-
-reduce :: [[Int]] -> [[Int]]
-reduce nss = let nss' = sortBy (compare `on` last) nss in tmp nss'
-             where
-                 tmp [] = []
-                 tmp (ns:nss) = [ns] ++ 
-                     if (last . head) nss == last ns then reduce $ tail nss else reduce nss
 
 
 problem32 :: IO () 
@@ -41,4 +30,4 @@ problem32 = do
         ws   = splitWays ns
         ans  = filter isPDPair [ splitPlacesBlanks w pd | w <- ws, pd <- pds ]
 
-    print $ sum $ map product $ reduce $ map (map list2num) ans
+    print $ map (map list2num) ans
