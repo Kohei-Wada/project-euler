@@ -1,11 +1,19 @@
 module Main where
     
-import Problems.Problem32
-import Quotient
+import Problems.Problem26
+
+import Data.Ratio
+import Decimal
 import Control.Monad
 
 
 main :: IO ()
 main = do 
-    let target = [ quotient (1, x) | x <- [1, 3, 11, 27, 101, 41, 7, 239, 73, 81, 451, 21649, 707]]
-    forM_ target (print . q2d)
+    let l = [ 1 % x | x <- [1..1000]]
+    
+    print $ toDecimal $ 1 % 7
+    print $ toDecimal $ 1 % 14
+    print $ toDecimal $ 1 % 21
+    print $ 714285 + 333333
+
+
