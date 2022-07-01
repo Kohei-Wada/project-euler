@@ -1,7 +1,5 @@
 module Problems.Problem40 where
 
-import Control.Monad
-
 
 cham :: String
 cham = concat [ show x | x <- [1..]]
