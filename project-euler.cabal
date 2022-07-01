@@ -41,6 +41,7 @@ library
     , extra
     , hmatrix
     , mtl
+    , primes
     , split
     , text
   default-language: Haskell2010
@@ -160,6 +161,7 @@ executable project-euler-exe
     , extra
     , hmatrix
     , mtl
+    , primes
     , project-euler
     , split
     , text
@@ -181,6 +183,7 @@ test-suite project-euler-test
     , extra
     , hmatrix
     , mtl
+    , primes
     , project-euler
     , split
     , text
