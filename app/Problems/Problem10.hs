@@ -8,4 +8,4 @@ import Eratosthenes
 
 problem10 :: IO () 
 problem10 = do 
-    print $ sum $ erat [2..2000000]
+    print $ sum $ erat 2000000

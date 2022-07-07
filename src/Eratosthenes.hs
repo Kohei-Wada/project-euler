@@ -33,6 +33,10 @@ doErat = do
            return ()
 
 
-erat :: [Int] -> [Int]
-erat l = let Erat{..} = execState doErat $ makeErat l in _primes
+erat' :: [Int] -> [Int]
+erat' l = let Erat{..} = execState doErat $ makeErat l in _primes
+
+
+erat :: Int -> [Int]
+erat n = erat' [2..n]
 

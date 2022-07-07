@@ -21,7 +21,7 @@ problem50 :: IO ()
 problem50 = do 
     let n  = 1000000 :: Integer
         m  = (fromIntegral . maxLength) n
-        ps = map fromIntegral $ erat [2 .. fromIntegral n]
+        ps = map fromIntegral $ erat (fromIntegral n)
         as = join $ 
             forM (reverse [21 .. m]) $ \l -> do 
                 let pss = convert l ps

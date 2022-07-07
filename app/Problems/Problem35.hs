@@ -29,4 +29,4 @@ isCyclePrime n =
 
 problem35 :: IO () 
 problem35 = do 
-    print $ filter isCyclePrime $ erat [2..1000000]
+    print $ filter isCyclePrime $ erat 1000000

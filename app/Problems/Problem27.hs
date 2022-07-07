@@ -18,7 +18,7 @@ primesLength p = tmp p 0
 
 problem27 :: IO () 
 problem27 = do 
-    let ps = erat [2..1000]
+    let ps = erat 1000
 
     let targets = [(a, fromIntegral b) | a <- [-1000..1000], b <- ps ++ map (*(-1)) ps]
         lenList = map (\x -> (x, (primesLength . eulerPolynominal) x)) targets
