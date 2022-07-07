@@ -29,6 +29,7 @@ library
       Eratosthenes
       Factors
       Fibonacci
+      Number
       Polygonal
   other-modules:
       Paths_project_euler
