@@ -2,6 +2,7 @@
 
 module Eratosthenes where
 
+import Data.Numbers.Primes
 import Control.Monad.State
 
 
@@ -38,5 +39,6 @@ erat' l = let Erat{..} = execState doErat $ makeErat l in _primes
 
 
 erat :: Int -> [Int]
-erat n = erat' [2..n]
+erat n = takeWhile (<= n) primes 
+
 
