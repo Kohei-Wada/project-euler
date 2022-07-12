@@ -1,9 +1,9 @@
 module Main where
 
-import Problems.Problem55
+import Problems.Problem56
 
 main :: IO ()
 main = do 
-    problem55
+    problem56
 
 
