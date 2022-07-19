@@ -1,12 +1,17 @@
 module Problems.Problem3 where 
 
-factor n = [x | x <- [1..n], n `mod` x == 0]
+
+primeFactors :: Int -> [Int]
+primeFactors n = 
+    let m = tmp n in 
+        if m == n then [m] else [m] ++ primeFactors (n `div` m) 
+    where 
+        tmp n = head $ [ x | x <- [2..n], n `mod` x == 0]
 
 
-
-factorization :: Integer -> [Integer]
-factorization 1 = []
-factorization n = v : factorization (n `div` v) 
-    where v = factor n !! 1
-
+problem3 :: IO () 
+problem3 = do 
+    let ans = maximum $ primeFactors 600851475143
+    print ans
+    
 
