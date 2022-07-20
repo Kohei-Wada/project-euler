@@ -40,9 +40,11 @@ library
     , array
     , base >=4.7 && <5
     , containers
+    , deepseq
     , extra
     , hmatrix
     , mtl
+    , parallel
     , primes
     , split
     , text
@@ -154,15 +156,17 @@ executable project-euler-exe
       Paths_project_euler
   hs-source-dirs:
       app
-  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  ghc-options: -threaded -O2 -eventlog -rtsopts -with-rtsopts=-N
   build-depends:
       Unique
     , array
     , base >=4.7 && <5
     , containers
+    , deepseq
     , extra
     , hmatrix
     , mtl
+    , parallel
     , primes
     , project-euler
     , split
@@ -182,9 +186,11 @@ test-suite project-euler-test
     , array
     , base >=4.7 && <5
     , containers
+    , deepseq
     , extra
     , hmatrix
     , mtl
+    , parallel
     , primes
     , project-euler
     , split
