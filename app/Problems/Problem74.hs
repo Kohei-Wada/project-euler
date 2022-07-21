@@ -7,7 +7,6 @@ import Data.List.Split
 import Control.Monad
 
 
-
 factorial :: Integer -> Integer
 factorial 0 = 1
 factorial n = n * factorial (n - 1) 
@@ -51,4 +50,3 @@ solve1 = do
 
 problem74 :: IO () 
 problem74 = solve1
-
