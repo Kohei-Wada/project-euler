@@ -1,0 +1,45 @@
+module Problems.Problem92 where
+
+
+import Control.Monad
+import Data.Function
+import Data.List
+import Data.List.Split
+import Control.DeepSeq
+import Control.Parallel.Strategies
+
+
+squareChain :: Int -> [Int]
+squareChain n = if n == 1 || n == 89 then [n] else  let n' = next n in n:squareChain n'
+    where 
+        next 0 = 0
+        next n = (n `mod` 10) ^2 + next (n `div` 10) 
+
+
+problem92 :: IO () 
+problem92 = do 
+    let tmp = map squareChain [1..10000000]
+
+    let ans = length $ filter ((== 89). last) tmp
+
+    
+    let targets = [1..10000000]
+        cs = chunksOf (length targets `div` 1000) targets
+    
+    let list = runEval $ do 
+                    cs' <- forM cs (\c -> rpar $ force $ map squareChain c)
+--                    forM_ cs' rseq
+                    return $ concat cs'
+                    
+
+
+    let l = (maximumBy (compare `on` length) tmp) `using` parBuffer
+    print l
+
+
+
+
+
+
+
+
