@@ -43,11 +43,8 @@ executables:
     main:                Main.hs
     source-dirs:         app
     ghc-options:
-    - -threaded
     - -O2
-    - -eventlog
     - -rtsopts
-    - -with-rtsopts=-N
     dependencies:
     - project-euler
 
