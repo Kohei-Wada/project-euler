@@ -1,12 +1,7 @@
 module Problems.Problem2 where
 
-import Fibonacci
+import Fibonacci (fib)
 
 
-targets = filter (even) $ takeWhile (< 400000000000000) [ fib n | n <- [0..]]
-
-problem2 = print $ sum targets
-
-
-
-
+problem2 = do 
+    print $ sum $ filter even $ takeWhile (< 4000000) [ fib n | n <- [0..]]
