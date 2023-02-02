@@ -137,7 +137,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      Unique
+      HUnit
+    , Unique
     , array
     , base >=4.7 && <5
     , containers
@@ -159,7 +160,8 @@ executable project-euler-exe
       app
   ghc-options: -O2 -rtsopts
   build-depends:
-      Unique
+      HUnit
+    , Unique
     , array
     , base >=4.7 && <5
     , containers
@@ -178,12 +180,14 @@ test-suite project-euler-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      FactorsTest
       Paths_project_euler
   hs-source-dirs:
       test
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      Unique
+      HUnit
+    , Unique
     , array
     , base >=4.7 && <5
     , containers
