@@ -1,20 +1,16 @@
 module Problems.Problem17 where
 
-
-
 numList = ["", "one", "two", "three", "four", "five", "six", "seven"
           , "eight", "nine", "ten", "eleven", "twelve", "thirteen" 
           , "fourteen", "fifteen", "sixteen", "seventeen", "eighteen"
           , "nineteen"
           ]
 
-numList' = ["", "", "twenty", "thirty", "fourty", "fifty", "sixty", "seventy"
+numList' = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy"
            , "eighty", "ninety"
            ]
 
 numList'' = ["hundred", "hundred and"]
-
-
 
 n2s :: Int -> String
 n2s n
@@ -28,7 +24,7 @@ n2s n
     where maxPlace n = (read $ [head $ show n]) :: Int
 
 
-
 problem17 :: IO () 
 problem17 = do 
-    print $ length $ concat $ map n2s [1..1000]
+    let ans = length $ concat $ map n2s [1 .. 1000]
+    print ans
