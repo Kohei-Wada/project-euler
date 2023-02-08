@@ -1,38 +1,57 @@
 module Problems.Problem19 where
 
+import Data.List (foldl') 
+import Control.Monad (forM_)
 
-data DOTW = Sun|Mon|Tue|Wed|Thu|Fri|Sur deriving (Show, Eq) 
+type Day = Int
+type Month = Int
+type Year = Int
+
+data Dow = Sun|Mon|Tue|Wed|Thu|Fri|Sur deriving (Show, Eq, Enum)  -- Day Of Week 
+
+data Date = Date Day Month Year Dow deriving (Show)
+
+daysOfMonth :: Month -> Year -> Int
+daysOfMonth 2 y
+  | y `mod` 400 /= 0 && y `mod` 100 == 0 = 28
+  | y `mod` 4 == 0 = 29
+  | otherwise = 28
+daysOfMonth m y 
+  | m == 4 || m == 6 || m == 9 || m == 11 = 30
+  | otherwise = 31
 
 
-
-dayOfTheWeek :: Int -> DOTW
-dayOfTheWeek 0 = Sun
-dayOfTheWeek 1 = Mon
-dayOfTheWeek 2 = Tue
-dayOfTheWeek 3 = Wed 
-dayOfTheWeek 4 = Thu 
-dayOfTheWeek 5 = Fri 
-dayOfTheWeek 6 = Sur 
+nextDow :: Dow -> Dow
+nextDow w = toEnum $ (fromEnum w + 1) `mod` 7 
 
 
-isLeapYear :: Int -> Bool
-isLeapYear n = not $ n `mod` 4 /= 0 || n `mod` 400 /= 0 && n `mod` 100 == 0
+nextDate :: Date -> Date
+nextDate (Date d m y w) = 
+    let nd = daysOfMonth m y 
+        tmp = (d + 1) `mod` (nd + 1)
+        d' = if tmp == 0 then 1 else tmp 
+
+        tmp' = if tmp == 0 then (m + 1) `mod` (12 + 1) else m
+        m' = if tmp' == 0 then 1 else tmp'
+
+        y' = if tmp' == 0 then y + 1 else y 
+        w' = nextDow w
+     in Date d' m' y' w'
 
 
-daysFrom1900 :: Int -> Int
-daysFrom1900 n  
-  | n <  1900 = undefined 
-  | n == 1900 = 0 
-  | otherwise = (sum $ map (\x -> if isLeapYear x then 366 else 365) [1900..n]) - 365
+dateFrom1900 :: [Date]
+dateFrom1900 = iterate nextDate (Date 1 1 1900 Mon)
+
+
+year :: Date -> Year
+year (Date _ _ y _) = y
 
 
 problem19 :: IO () 
 problem19 = do 
-    let years = [1900..2000]
-        weeks = map (\x -> dayOfTheWeek (x `mod` 7)) $ (map daysFrom1900 years)
+    let days = takeWhile ((/= 2001) . year) $ dropWhile ((/= 1901) . year) dateFrom1900
+        ans = foldl' countTarget 0 days
+            where 
+                countTarget n (Date d _ _ w) = if d == 1 && w == Sun then n + 1 else n 
 
-    print $  filter (\w -> w == Sun) weeks
-
-
-
-
+    print ans
