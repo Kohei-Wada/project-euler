@@ -1,30 +1,30 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Problems.Problem22 where
-    
-import Data.List
-import Data.Char
 
+import Data.List (sort) 
+import Data.Char (ord) 
 
+import qualified Data.Text as T
+import Data.Text (Text)
 
+isTarget :: Char -> Bool
+isTarget '\"' = False
+isTarget '\n' = False 
+isTarget _ = True
 
-namesList :: String -> [String]
-namesList s = filter (not . null) $ lines $ parser s
-    where 
-        parser :: String -> String 
-        parser = map $ \x -> 
-            case x of 
-              ',' -> '\n'
-              '"' -> '\n'
-              otherwise -> x
-              
+names2score :: [Text] -> [Int]
+names2score ns = go ns 1 where
+    go [] _     = []
+    go (n:ns) i = i * name2score n : go ns (i + 1)  
 
-
-name2score :: String -> Int
-name2score n = 
-    foldl (\s x -> s + ord x - 64) 0 n
-
-
+name2score :: Text -> Int
+name2score = T.foldl (\acc c -> acc + (ord c - 64)) 0 
 
 problem22 :: IO () 
 problem22 = do 
     d <- readFile "data/names.txt" 
-    print $ sum $ map name2score $ sort $ namesList d
+    let ns = sort $ T.splitOn "," $ T.filter isTarget $ T.pack d
+        ss = names2score ns 
+        ans = sum ss 
+
+    print ans
