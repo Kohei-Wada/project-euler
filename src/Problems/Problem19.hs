@@ -1,7 +1,6 @@
 module Problems.Problem19 where
 
 import Data.List (foldl') 
-import Control.Monad (forM_)
 
 type Day = Int
 type Month = Int
@@ -20,10 +19,8 @@ daysOfMonth m y
   | m == 4 || m == 6 || m == 9 || m == 11 = 30
   | otherwise = 31
 
-
 nextDow :: Dow -> Dow
 nextDow w = toEnum $ (fromEnum w + 1) `mod` 7 
-
 
 nextDate :: Date -> Date
 nextDate (Date d m y w) = 
@@ -38,14 +35,11 @@ nextDate (Date d m y w) =
         w' = nextDow w
      in Date d' m' y' w'
 
-
 dateFrom1900 :: [Date]
 dateFrom1900 = iterate nextDate (Date 1 1 1900 Mon)
 
-
 year :: Date -> Year
 year (Date _ _ y _) = y
-
 
 problem19 :: IO () 
 problem19 = do 
